@@ -14,6 +14,11 @@ class MongoDBConnector:
             return list(collection.find())
         return list(collection.find(query))
     
+    def insert_result(self, result, collection_name):
+        collection = self.get_collection(collection_name)
+        insert_result = collection.insert_one(result)
+        return insert_result
+    
     def get_collection(self, collection_name):
         return self.db[collection_name]
 
