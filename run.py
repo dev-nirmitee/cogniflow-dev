@@ -46,7 +46,7 @@ def imh_model():
         input_data = imh_input_data(activity_data, activity_type_data, location_data)
     try:
         result = run_imh_model(input_data)
-        insert = mongodb_connector.insert_result(result, 'imh_results')
+        insert_result = mongodb_connector.insert_result(result, 'imh_results', user_id, project_id)
         return jsonify({"status": "success", "data": result, "message": "IMH model executed successfully"}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
@@ -69,7 +69,7 @@ def guarvis_model():
         input_data = guarvis_input_data(activity_data, sleep_data)
     try:
         result = run_guarvis_model(input_data)
-        insert = mongodb_connector.insert_result(result, 'guarvis_results')
+        insert_result = mongodb_connector.insert_result(result, 'guarvis_results', user_id, project_id)
         return jsonify({"status": "success", "data": result, "message": "Guarvis model executed successfully"}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
